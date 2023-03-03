@@ -1,0 +1,37 @@
+{
+  "infraConfig": {
+    "spannerInstanceConfig": {
+      "projectId" : "spanner-hackaton-see",
+      "instanceId": "machmeter-gaming-db",
+      "dbName": "enter-db",
+      "configuration": "regional-us-central1",
+      "displayName": "load_test_instance",
+      "processingUnits": 1000,
+      "environment": "testing"
+    },
+    "gkeConfig": {
+      "clusterName": "jmeter-load-test",
+      "namespace": "spanner-test",
+      "region": "us-central1",
+      "network": "gke-network",
+      "subnetwork": "gke-subnet",
+      "ipRangePodsName": "ip-range-pods",
+      "ipRangeServicesName": "ip-range-services",
+      "service_account_json": "sa.json",
+      "machineType": "e2-standard-2",
+      "nodeLocations": "us-central1-a",
+      "minCount": 1,
+      "maxCount": 1,
+      "initialNodeCount": 1
+    }
+  },
+  "ddlConfig" : {
+    "spannerInstanceConfig" : {
+      "instanceId" : "machmeter-gaming-db",
+      "dbName" : "enter-db",
+      "configuration": "regional-us-central1",
+      "projectId" : "spanner-hackaton-see"
+    },
+    "schemaFilePath" : "usecases/gaming/single-player-games/templates/schema.sql"
+  }
+}
