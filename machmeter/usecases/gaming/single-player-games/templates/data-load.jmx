@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Scenario 1 Cloud Spanner Initial Load" enabled="true">
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Gaming Cloud Spanner Initial Load" enabled="true">
       <stringProp name="TestPlan.comments">Populates the user_bal and user_txn table with dummy data</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
@@ -10,17 +10,17 @@
         <collectionProp name="Arguments.arguments">
           <elementProp name="project" elementType="Argument">
             <stringProp name="Argument.name">project</stringProp>
-            <stringProp name="Argument.value">${__P(project, default)}</stringProp>
+            <stringProp name="Argument.value">${__P(project, spanner-hackathon-see)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="instance" elementType="Argument">
             <stringProp name="Argument.name">instance</stringProp>
-            <stringProp name="Argument.value">${__P(instance, default)}</stringProp>
+            <stringProp name="Argument.value">${__P(instance, machmeter-enter-db-test)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="database" elementType="Argument">
             <stringProp name="Argument.name">database</stringProp>
-            <stringProp name="Argument.value">${__P(database, movies_database_test)}</stringProp>
+            <stringProp name="Argument.value">${__P(database, enter-db)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="connections" elementType="Argument">
@@ -45,7 +45,7 @@
           </elementProp>
         </collectionProp>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath">/test/</stringProp>
+      <stringProp name="TestPlan.user_define_classpath">/Users/elajamali/jmeter-test/</stringProp>
     </TestPlan>
     <hashTree>
       <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="JDBC Connection" enabled="true">
@@ -81,10 +81,10 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="actors_insert" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="player_insert" enabled="true">
           <stringProp name="dataSource">conn_pool</stringProp>
-          <stringProp name="query">insert into actors (id, first_name, last_name) values (?,?,?)</stringProp>
-          <stringProp name="queryArguments">${actor_id},${first_name},${last_name}</stringProp>
+          <stringProp name="query">insert into player (playerId, FirstName, LastName) values (?,?,?)</stringProp>
+          <stringProp name="queryArguments">${playerId},${FirstName},${LastName}</stringProp>
           <stringProp name="queryArgumentsTypes">INTEGER,VARCHAR,VARCHAR</stringProp>
           <stringProp name="queryTimeout"></stringProp>
           <stringProp name="queryType">Prepared Update Statement</stringProp>
@@ -96,15 +96,15 @@
         <hashTree>
           <UserParameters guiclass="UserParametersGui" testclass="UserParameters" testname="User Parameters" enabled="true">
             <collectionProp name="UserParameters.names">
-              <stringProp name="-1650554971">actor_id</stringProp>
-              <stringProp name="-160985414">first_name</stringProp>
-              <stringProp name="2013122196">last_name</stringProp>
+              <stringProp name="1879273436">playerId</stringProp>
+              <stringProp name="2136803643">FirstName</stringProp>
+              <stringProp name="-1394955679">LastName</stringProp>
             </collectionProp>
             <collectionProp name="UserParameters.thread_values">
-              <collectionProp name="-917823462">
-                <stringProp name="-623245923">${__Random(0,100000)}</stringProp>
-                <stringProp name="118040362">${__UUID()}</stringProp>
-                <stringProp name="118040362">${__UUID()}</stringProp>
+              <collectionProp name="92294099">
+                <stringProp name="-1215713952">${__counter(FALSE,)}</stringProp>
+                <stringProp name="-1822286743">${__RandomString(35,abcdefghijklmnopqrstuvwxyz1234567890)}</stringProp>
+                <stringProp name="-1822286743">${__RandomString(35,abcdefghijklmnopqrstuvwxyz1234567890)}</stringProp>
               </collectionProp>
             </collectionProp>
             <boolProp name="UserParameters.per_iteration">false</boolProp>
@@ -112,7 +112,7 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="movies_insert" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="movies_insert" enabled="false">
           <stringProp name="dataSource">conn_pool</stringProp>
           <stringProp name="query">insert into movies (id, name, year) values (?,?,?)</stringProp>
           <stringProp name="queryArguments">${movie_id},${movie_name},${year}</stringProp>
@@ -143,7 +143,7 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="directors_insert" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="directors_insert" enabled="false">
           <stringProp name="dataSource">conn_pool</stringProp>
           <stringProp name="query">insert into directors (id, first_name, last_name) values (?,?,?)</stringProp>
           <stringProp name="queryArguments">${director_id},${dir_first_name},${dir_last_name}</stringProp>
@@ -174,7 +174,7 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="roles_insert" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="roles_insert" enabled="false">
           <stringProp name="dataSource">conn_pool</stringProp>
           <stringProp name="query">insert into roles (actor_id, movie_id, role) values (?,?,?);</stringProp>
           <stringProp name="queryArguments">${actor_id},${movie_id},${role}</stringProp>
@@ -200,7 +200,7 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="movie_directors_insert" enabled="true">
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="movie_directors_insert" enabled="false">
           <stringProp name="dataSource">conn_pool</stringProp>
           <stringProp name="query">insert into movies_directors (director_id, movie_id) values (?,?);</stringProp>
           <stringProp name="queryArguments">${director_id},${movie_id}</stringProp>
@@ -222,7 +222,7 @@
           </UserParameters>
           <hashTree/>
         </hashTree>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
@@ -244,11 +244,11 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Fetch actor ids" enabled="true">
-          <stringProp name="TestPlan.comments">Create CSV for sample UserIds to be used for perf test.</stringProp>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Fetch playerIds" enabled="true">
+          <stringProp name="TestPlan.comments">Create CSV for sample playerIds to be used for perf test.</stringProp>
           <stringProp name="dataSource">conn_pool</stringProp>
           <stringProp name="queryType">Select Statement</stringProp>
-          <stringProp name="query">SELECT id FROM actors TABLESAMPLE BERNOULLI (50 PERCENT) limit 100;</stringProp>
+          <stringProp name="query">SELECT playerId FROM players TABLESAMPLE BERNOULLI (50 PERCENT) limit 50000;</stringProp>
           <stringProp name="queryArguments"></stringProp>
           <stringProp name="queryArgumentsTypes"></stringProp>
           <stringProp name="variableNames"></stringProp>
@@ -261,7 +261,7 @@
           <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="true">
             <stringProp name="dataSource">conn_pool</stringProp>
             <stringProp name="queryType">Select Statement</stringProp>
-            <stringProp name="query">SELECT id FROM actors TABLESAMPLE BERNOULLI (50 PERCENT) limit 100;</stringProp>
+            <stringProp name="query">SELECT playerId FROM players TABLESAMPLE BERNOULLI (50 PERCENT) limit 50000;</stringProp>
             <stringProp name="queryArguments"></stringProp>
             <stringProp name="queryArgumentsTypes"></stringProp>
             <stringProp name="variableNames"></stringProp>
@@ -289,7 +289,7 @@ for (Object row : resultSet ) {
     result.append(System.getProperty(&quot;line.separator&quot;));
 }
 
-org.apache.commons.io.FileUtils.writeStringToFile(new File(&quot;/data/actors.csv&quot;), result.toString(), &quot;UTF-8&quot;);</stringProp>
+org.apache.commons.io.FileUtils.writeStringToFile(new File(&quot;/data/playerId.csv&quot;), result.toString(), &quot;UTF-8&quot;);</stringProp>
           </JSR223PreProcessor>
           <hashTree/>
         </hashTree>

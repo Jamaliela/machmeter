@@ -1,8 +1,8 @@
 {
   "namespace": "spanner-test",
-  "jMeterTemplatePath" : "usecases/entertainment/movies-database/templates/data-load.jmx",
+  "jMeterTemplatePath" : "usecases/gaming/single-player-games/templates/data-load.jmx",
   "jMeterParams" : {
-    "project": "span-cloud-testing",
+    "project": "spanner-hackaton-see",
     "instance": "machmeter-enter-db-test",
     "database": "enter-db",
     "connections": 1000,
